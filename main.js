@@ -66,12 +66,13 @@ const fetchPoints = async () => {
 
 				// Listen for "select" event on the feature to call the displayPanorama function
 				feature.on("select", () => {
-					// console.log("clicked");
 					console.log(feature);
+					console.log(typeof feature.style_);
 					if (isValidPath(feature.values_.panorama_img))
 						displayPanorama(feature.values_.panorama_img);
 					else alert("No image for this coordinate");
 				});
+
 				features.push(feature);
 			});
 
@@ -94,6 +95,19 @@ const fetchPoints = async () => {
 				map.forEachFeatureAtPixel(e.pixel, (feature) => {
 					feature.dispatchEvent("select");
 				});
+			});
+
+			// Change the cursor to pointer when the mouse is over a feature
+			map.on("pointermove", (e) => {
+				let hit = map.forEachFeatureAtPixel(e.pixel, (feature) => {
+					return true;
+				});
+
+				if (hit) {
+					map.getTargetElement().style.cursor = "pointer";
+				} else {
+					map.getTargetElement().style.cursor = "";
+				}
 			});
 		});
 };
