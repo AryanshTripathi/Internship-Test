@@ -7,7 +7,7 @@
     "serve": "vite preview"
   },
   "devDependencies": {
-    "vite": "^4.0.4"
+    "vite": "^4.3.9"
   },
   "dependencies": {
     "@enra-gmbh/panolens": "^0.0.11",
